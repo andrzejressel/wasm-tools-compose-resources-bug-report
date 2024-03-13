@@ -1,0 +1,37 @@
+package example:service@0.1.0;
+
+world main {
+    export main-interface;
+    import a-interface;
+    import b-interface;
+}
+
+world a {
+    export a-interface;
+    import b-interface;
+}
+
+world b {
+    export my-resource;
+    export b-interface;
+}
+
+interface main-interface {
+    main: func();
+}
+
+interface my-resource {
+    resource rec {
+        constructor();
+    }
+}
+
+interface a-interface {
+    use my-resource.{rec};
+    run-a: func(rec: borrow<rec>);
+}
+
+interface b-interface {
+    use my-resource.{rec};
+    run-b: func(rec: borrow<rec>);
+}
